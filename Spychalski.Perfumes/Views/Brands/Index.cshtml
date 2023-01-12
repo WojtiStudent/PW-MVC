@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Spychalski.Perfumes.Models.Brand>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="display-5">Brands list</h1>
+
+<form method="get" asp-action="Index">
+    <div class="row">
+        <div class="col">
+            <input class="form-control" type="search" placeholder="Brand name" value="" name="BrandName" />
+        </div>
+        <div class="col">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+
+<p>
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-success" asp-action="Create">Create New</a>
+        </div>
+    </div>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width:75%">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th style="width:25%"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td style="width:75%">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td style="width:25%">
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.BrandId">Edit</a> 
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.BrandId">Details</a> 
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.BrandId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

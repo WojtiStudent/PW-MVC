@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Spychalski.Perfumes.Models.Perfume>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="display-5">Perfume list</h1>
+
+<form method="get" asp-action="Index">
+    <div class="row">
+        <div class="col-md-5">
+            <input class="form-control" type="search" placeholder="Perfume name" value="" name="PerfumeName" />
+        </div>
+        <div class="col-md-2">
+            @Html.DropDownList("StatusType", Html.GetEnumSelectList<Spychalski.Perfumes.Models.StatusType>(), "All statuses", new { @class="form-control" })
+        </div>
+        <div class="col-md-3">
+            @Html.DropDownList("BrandId", ViewBag.BrandId, "All brands", new { @class="form-control" })
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+
+<p>
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-success" asp-action="Create">Create New</a>
+        </div>
+    </div>
+</p>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width:37.5%">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </t>
+            <th style="width:15%">
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th style="width:25%"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td style="width:37.5%">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand.Name)
+            </td>
+            <td style="width:15%">
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td style="width:25%">
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.PerfumeId">Edit</a> 
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.PerfumeId">Details</a> 
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.PerfumeId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
